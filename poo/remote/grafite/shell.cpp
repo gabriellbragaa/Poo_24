@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class Grafite{
+class Lapiseira{
 // atributo size
 private:
     int size; // tamanho grafite
@@ -13,14 +13,14 @@ public:
 // cria o construtor 
 // inicializacao
 
-    Grafite(double thickness= 0.3, string hardness= "HB", int size=0) : size(size), thickness(thickness), hardness(hardness){}
+    Lapiseira(double thickness, string hardness, int size) : size(size), thickness(thickness), hardness(hardness){}
 
 int usagePerSheet(){
         if(hardness == "HB"){ return 1; 
         } else if(hardness == "2B"){ return 2;
         } else if(hardness == "4B"){ return 3;
         } else if(hardness == "6B"){ return 4;
-        }
+        } return 0;
 
     }
 // chama o get pq size, thickness e hardness sao privado
@@ -32,95 +32,110 @@ int getSize(){
 void setSize(int size){
      this-> size = size;
 }
-double getThickness(){
+
+    double getThickness(){
     return thickness;
-}
-string getHardness(){
+    }
+    string getHardness(){
     return hardness;
-}
-void setThickness(double thickness) {
-        this->thickness = thickness;
     }
-void setHardness(string hardness) {
-        this->hardness = hardness;
+
+    void setThickness(double thickness) {
+    this->thickness = thickness;
     }
-string toString() {
-        return "Grafite [Dureza: " + hardness + ", Tamanho: " + to_string(size) + "mm]";
+
+    void setHardness(string hardness) {
+    this->hardness = hardness;
     }
+    string toString() {
+        ostringstream oss;
+        oss << fixed << setprecision(1) << this->thickness;
+        return "[" + oss.str() + ":" + this->hardness + ":" + to_string(this->size) + "]";
+    }
+
 };
 
 
-class Lapiseira{
+class Grafite{
 private:
-    Grafite* tip;
+    Lapiseira* tip;
     double thickness;
 public:
 
     // Construtor
-    Lapiseira() : tip(nullptr){}
+    Grafite(double thickness) : thickness(thickness){}
 
     // bool
     bool hasGrafite(){
-        return tip != nullptr; // verificar se ha grafite
+        if(tip == nullptr){ // verificar se ha grafite
+        return false;
     }
+    return true;
+}
     
     // implementar o metodo insert
     // bool
-    bool insert(double thickness, string hardness, int size) {
-    
-    if (tip != nullptr) {
-        cout << "fail: ja existe grafite" << endl;
-        return false;
-    }
-
-    if (this->thickness != thickness) {
-        cout << "fail: calibre incompativel" << endl;
-        return false;
-    }
-
-    // ajuda do chat
-    tip = new Grafite( thickness, hardness, size);
-    cout << "Grafite inserido com sucesso." << endl;
-    return true;
-    }
-    
-    // lead | null
-    Grafite* remove (){ 
-        if (tip == nullptr){
-            cout << "fail: nao existe grafite" << endl;
-            return nullptr;
-        }
-        Grafite* remove = tip; 
-        tip = nullptr;
-        return remove;
-        }
-    
-    // void
-    void writePage() {
-        if (!hasGrafite()) { // se nao ha 
-            cout << "fail: nao existe grafite" << endl;
+    void insert(double thickness, const std::string& hardness, int size) {
+        if (this->tip != nullptr) {
+            std::cout << "fail: ja existe grafite" << std::endl;
             return;
         }
 
-        int consumo = tip->usagePerSheet();
-        if (tip->getSize() < consumo) { 
-            cout << "fail: tamanho insuficiente " << endl;
-            tip->setSize(0); // Consome todo o grafite restante
-        } else {
-            tip->setSize(tip->getSize() - consumo);
-            cout << "fail: folha incompleta" << tip->getSize() << "mm." << endl;
+        if (this->thickness != thickness) {
+            std::cout << "fail: calibre incompativel" << std::endl;
+            return;
         }
+
+        this->tip = new Lapiseira(thickness, hardness, size);
+        std::cout << "Grafite inserido com sucesso." << std::endl;
     }
 
-    // Mostra o estado atual da lapiseira
-    string toString() const {
-        if (hasGrafite()) {
-            return "Lapiseira com " + tip->toString();
-        } else {
-            return "Lapiseira sem grafite.";
+    Lapiseira* remove() {
+        if (tip == nullptr) {
+            cout << "fail: nao existe grafite" << endl;
+            return nullptr;
         }
+
+        Lapiseira* removed = tip;
+        tip = nullptr;
+        delete removed; // Libera a memória alocada
+        return removed;
+    }
+    // void
+    void writePage() {
+        if (this->tip == nullptr) {
+            fn::write("fail: nao existe grafite");
+            return;
+        }
+
+        if (this->tip->getSize() <= 10) {
+            fn::write("fail: tamanho insuficiente");
+            return;
+        }
+
+        int usage = this->tip->usagePerSheet();
+        if (this->tip->getSize() < usage + 10) {
+            fn::write("fail: folha incompleta");
+            this->tip->setSize(10);
+            return;
+        }
+
+        this->tip->setSize(this->tip->getSize() - usage);
+    }
+        
+
+    // Mostra o estado atual da lapiseira
+    string toString()  {
+        std::string leadInfo = "null";
+        if (this->tip != nullptr) {
+            leadInfo = this->tip->toString();
+        }
+        std::ostringstream oss;
+        oss << std::fixed << std::setprecision(1) << this->thickness;
+        return "calibre: " + oss.str() + ", grafite: " + leadInfo;
     }
 };
+
    
     
 
@@ -133,15 +148,12 @@ public:
 
 class Adapter {
 private:
-    Lapiseira pencil;
+    Grafite pencil;
 public:
-    Adapter(double thickness=0.3, string hardness="HB", int size=0) : pencil( thickness, hardness, size) {}
+    Adapter(double thickness) : pencil( thickness) {}
     
     void insert(double thickness, string hardness,int length ) {
-        (void) thickness;
-        (void) hardness;
-        (void) length;
-        pencil.insert(make_shared<Lead>(thickness, hardness, length ));
+        pencil.insert(thickness, hardness, length );
     }
 
     void remove() {
