@@ -1,0 +1,20 @@
+{
+    "patches": [
+        {
+            "label": "2024-11-22_08-40-29",
+            "content": "@@ -117,17 +117,16 @@\n ) %7B%0A    \n- \n Student \n@@ -132,21 +132,8 @@\n  stu\n-(0, 100, 0.0)\n ;%0A%0A \n"
+        },
+        {
+            "label": "2024-11-26_23-42-59",
+            "content": "@@ -117,16 +117,17 @@\n ) %7B%0A    \n+ \n Student \n@@ -136,16 +136,21 @@\n u(0, 100\n+, 0.0\n );%0A%0A    \n"
+        },
+        {
+            "label": "2024-11-26_23-49-27",
+            "content": "@@ -139,13 +139,8 @@\n  100\n-, 0.0\n );%0A%0A\n"
+        },
+        {
+            "label": "2024-11-27_00-17-27",
+            "content": "#include \"fn.hpp\" // https://raw.githubusercontent.com/senapk/cppaux/master/fn.hpp\n#include \"student.hpp\"\n\nint main() {\n    Student stu(0, 100, 0.0);\n\n    while (true) {\n        fn::write(\"$\", \"\");\n        auto line = fn::input();\n        auto args = fn::split(line, ' ');\n        fn::write(line);\n\n        if      (args[0] == \"end\"   ) { break;                               }\n\n        else if (args[0] == \"show\"  ) { stu.show();                      }\n        else if (args[0] == \"init\"  ) { stu.init(+args[1]);              }\n        else if (args[0] == \"charge\") { stu.charge(+args[1]);            }\n        else if (args[0] == \"sum\"   ) { stu.sum(+args[1], +args[2]);     }\n        else if (args[0] == \"div\"   ) { stu.div(+args[1], +args[2]);     }\n\n        else                          { fn::write(\"fail: comando invalido\"); }\n    }\n}\n"
+        }
+    ]
+}

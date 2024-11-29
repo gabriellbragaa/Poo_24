@@ -1,0 +1,104 @@
+{
+    "patches": [
+        {
+            "label": "2024-11-27_00-31-24",
+            "content": "@@ -16,1488 +16,8 @@\n p%22%0A%0A\n-using namespace std;%0A%0Aclass Relogio%0A%7B%0Aprivate:%0A    int hour;%0A    int minute;%0A    int second;%0Apublic:%0A     Relogio(int h=0, int m=0, int s=0) : hour(h), minute(m), second(s)%7B%7D%0A    %0A// como os parametris sao privados, devo criar os metodos gets%0A%0Aint getHour(int value)%7B%0A    if ( hour %3C 0 %7C%7C value %3E= 24)%7B%0A        cout %3C%3C %22fail: hora invalida%22 %3C%3C endl; %0A    %7D%0A    return this-%3E hour;%0A%7D%0Aint getMinute(int value)%7B%0A    if(value %3C 0 %7C%7C value %3E 59)%7B%0A        cout %3C%3C %22fail: minuto invalido%22 %3C%3C endl; %0A    %7D%0A    this-%3E minute = value;%0A%7D%0Aint getSecond(int value)%7B%0A    if(value %3C 0 %7C%7C value %3E 59)%7B%0A        cout %3C%3C %22fail: segundo invalido%22 %3C%3C endl; %0A    %7D%0A    return this-%3E second;%0A%7D%0A// Parte 5: nextSecond%0A    // - Crie um m%C3%A9todo nextSecond que incrementa o segundo em 1.%0A    // - Crie um objeto rel%C3%B3gio, atribua valores para hora, minuto e segundo e imprima a hora.%0A    // - Teste o m%C3%A9todo nextSecond criando horas com os seguintes valores e testando:%0A    // - 10:02:30%0A    // - 15:50:59%0A    // - 21:59:59%0A    // - 23:59:59%0A    void nextSecond() %7B%0A        second++;%0A        if (hour == 24) %7B%0A            hour = 0;%0A            hour ++;%0A            if (minute == 60) %7B%0A                minute = 0;%0A                minute++;%0A                if (second == 60) %7B%0A                    second = 0;%0A                    second++;%0A                %7D%0A            %7D%0A        %7D%0A    %7D%0A%7D;%0A string toString()%0A    %7B%0A        return  to_string(hour) + %22:%22 + to_string(minute) + %22:%22 + to_string(second);%0A    %7D%0A%7D;%0A%0A%0A\n clas\n@@ -41,16 +41,18 @@\n te:%0A    \n+//\n  Time ti\n@@ -59,15 +59,8 @@\n me;%0A\n-     %0A%0A\n %0Apub\n@@ -193,32 +193,34 @@\n second;%0A        \n+//\n  this-%3Etime = Ti\n@@ -302,32 +302,34 @@\n ) hour;%0A        \n+//\n  this-%3Etime.getH\n@@ -324,17 +324,17 @@\n s-%3Etime.\n-g\n+s\n etHour(h\n@@ -401,32 +401,35 @@\n  minute;%0A       \n+ //\n  this-%3Etime.getM\n@@ -416,33 +416,33 @@\n   // this-%3Etime.\n-g\n+s\n etMinute(minute)\n@@ -508,24 +508,27 @@\n ond;%0A       \n+ //\n  this-%3Etime.\n@@ -531,17 +531,17 @@\n ime.\n-getMinute\n+setSecond\n (sec\n@@ -585,16 +585,18 @@\n         \n+//\n  this-%3Et\n@@ -642,32 +642,34 @@\n how() %7B%0A        \n+//\n  fn::write(time)\n"
+        },
+        {
+            "label": "2024-11-28_09-11-05",
+            "content": "@@ -255,16 +255,17 @@\n os gets%0A\n+%0A\n int getH\n@@ -272,178 +272,41 @@\n our(\n-)  %7B%0A     %0A    return hour; %0A    %7D%0A    int getMinute() %7B%0A    return minute; %0A    %7D%0A    int getSecond() %7B%0A    return second; %0A    %7D%0A%0Aint setHour(int h)%7B%0A    if ( h\n+int value)%7B%0A    if ( hour\n  %3C 0 %7C%7C \n h %3E=\n@@ -301,17 +301,21 @@\n  %3C 0 %7C%7C \n-h\n+value\n  %3E= 24)%7B\n@@ -377,30 +377,34 @@\n     \n+return \n this-%3E\n+ \n hour\n- = h\n ;%0A%7D%0Aint \n setM\n@@ -399,17 +399,17 @@\n ;%0A%7D%0Aint \n-s\n+g\n etMinute\n@@ -413,17 +413,21 @@\n ute(int \n-m\n+value\n )%7B%0A    i\n@@ -432,17 +432,21 @@\n  if(\n-m\n+value\n  %3C 0 %7C%7C \n m %3E \n@@ -441,17 +441,21 @@\n  %3C 0 %7C%7C \n-m\n+value\n  %3E 59)%7B%0A\n@@ -534,17 +534,21 @@\n e = \n-m\n+value\n ;%0A%7D%0Aint \n setS\n@@ -543,17 +543,17 @@\n ;%0A%7D%0Aint \n-s\n+g\n etSecond\n@@ -557,17 +557,21 @@\n ond(int \n-s\n+value\n )%7B%0A    i\n@@ -576,17 +576,21 @@\n  if(\n-s\n+value\n  %3C 0 %7C%7C \n s %3E \n@@ -585,17 +585,21 @@\n  %3C 0 %7C%7C \n-s\n+value\n  %3E 59)%7B%0A\n@@ -683,12 +683,8 @@\n cond\n- = s\n ;%0A%7D%0A\n@@ -1029,17 +1029,16 @@\n :59%0A    \n- \n void nex\n@@ -1052,28 +1052,8 @@\n () %7B\n-    // ajuda do chat\n %0A   \n@@ -1083,20 +1083,18 @@\n if (\n-second\n+hour\n  == \n-60\n+24\n ) %7B%0A\n@@ -1105,22 +1105,20 @@\n         \n-second\n+hour\n  = 0;%0A  \n@@ -1127,22 +1127,21 @@\n         \n-minute\n+hour \n ++;%0A    \n@@ -1212,20 +1212,22 @@\n         \n-hour\n+minute\n ++;%0A    \n@@ -1238,34 +1238,36 @@\n         if (\n-hour\n+second\n  == \n-24\n+60\n ) %7B%0A        \n@@ -1282,18 +1282,19 @@\n     \n-hour\n+second\n  = 0;\n- \n %0A   \n@@ -1298,33 +1298,45 @@\n                 \n-%7D\n+    second++;\n %0A            %7D%0A \n@@ -1324,34 +1324,42 @@\n ++;%0A            \n-%7D%0A\n+    %7D%0A    \n         %7D%0A    %7D%0A\n@@ -1344,32 +1344,36 @@\n %7D%0A            %7D%0A\n+    \n     %7D%0A    string\n@@ -1361,24 +1361,30 @@\n        %7D%0A   \n+ %7D%0A%7D;%0A\n  string toSt\n@@ -1393,240 +1393,109 @@\n ng()\n- %7B\n %0A    \n-string h = (hour %3C 10 ? %220%22 : %22%22) + std::to_string(hour);%0A    string m = (minute %3C 10 ? %220%22 : %22%22) + std::to_string(minute);%0A    string s = (second %3C 10 ? %220%22 : %22%22) + std::to_string(second);%0A    return h + %22:%22 + m + %22:%22 + s\n+%7B%0A        return  to_string(hour) + %22:%22 + to_string(minute) + %22:%22 + to_string(second);%0A    %7D%0A%7D\n ;%0A\n-%7D\n %0A%0Acl\n@@ -1522,23 +1522,20 @@\n e:%0A     \n-Relogio\n+Time\n  time;%0A \n@@ -1539,16 +1539,18 @@\n ;%0A     %0A\n+%0A%0A\n public:%0A\n@@ -1700,23 +1700,20 @@\n %3Etime = \n-Relogio\n+Time\n (hour, m\n@@ -1805,17 +1805,17 @@\n s-%3Etime.\n-s\n+g\n etHour(h\n@@ -1894,33 +1894,33 @@\n      this-%3Etime.\n-s\n+g\n etMinute(minute)\n@@ -2002,17 +2002,17 @@\n s-%3Etime.\n-s\n+g\n etMinute\n@@ -2162,16 +2162,17 @@\n  main() \n+%7B\n %0A    Ada\n@@ -2876,18 +2876,13 @@\n     %7D%0A    %7D%0A\n-    %7D%0A\n+%7D\n"
+        },
+        {
+            "label": "2024-11-28_09-17-46",
+            "content": "@@ -501,31 +501,24 @@\n  %0A    %7D%0A    \n-return \n this-%3Ehour =\n@@ -626,31 +626,24 @@\n  %0A    %7D%0A    \n-return \n this-%3E minut\n"
+        },
+        {
+            "label": "2024-11-28_09-18-44",
+            "content": "@@ -1730,19 +1730,16 @@\n %22 + s;%0A%7D\n-%0A%7D;\n %0A%0Aclass \n@@ -1757,24 +1757,25 @@\n rivate:%0A    \n+ \n Relogio time\n@@ -1776,24 +1776,29 @@\n o time;%0A\n+     \n %0Apublic:\n %0A    // \n@@ -1793,148 +1793,8 @@\n lic:\n-%0A    // Construtor%0A    Adapter(int hour = 0, int minute = 0, int second = 0) : time(hour, minute, second) %7B%7D%0A%0A    // M%C3%A9todo de inicializa%C3%A7%C3%A3o\n %0A   \n@@ -1983,31 +1983,8 @@\n  %7D%0A%0A\n-    // M%C3%A9todos setters%0A\n     \n@@ -2008,32 +2008,60 @@\n hour) %7B%0A        \n+(void) hour;%0A         this-%3E\n time.setHour(hou\n@@ -2104,32 +2104,61 @@\n nute) %7B%0A        \n+(void) minute;%0A        this-%3E\n time.setMinute(m\n@@ -2163,33 +2163,32 @@\n (minute);%0A    %7D%0A\n-%0A\n     void setSeco\n@@ -2216,79 +2216,67 @@\n     \n-time.setSecond(\n+(void) \n second\n-)\n ;%0A    \n-%7D%0A%0A\n     \n-// M%C3%A9todo para incrementar o segundo\n+this-%3Etime.setMinute(second);%0A    %7D%0A\n %0A   \n@@ -2304,16 +2304,23 @@\n         \n+ this-%3E\n time.nex\n@@ -2340,44 +2340,12 @@\n   %7D%0A\n-%0A\n     \n-// M%C3%A9todo para exibir o hor%C3%A1rio\n %0A   \n@@ -2359,32 +2359,33 @@\n how() %7B%0A        \n+ \n fn::write(time.t\n@@ -2386,19 +2386,8 @@\n time\n-.toString()\n );%0A \n@@ -2406,17 +2406,16 @@\n  main() \n-%7B\n %0A    Ada\n@@ -3131,15 +3131,6 @@\n     \n-return 0;%0A\n %7D\n+%0A\n"
+        },
+        {
+            "label": "2024-11-28_09-35-46",
+            "content": "@@ -1393,17 +1393,17 @@\n our == 2\n-3\n+4\n ) %7B%0A    \n@@ -2056,16 +2056,17 @@\n second;%0A\n+ \n         \n"
+        },
+        {
+            "label": "2024-11-28_09-37-21",
+            "content": "@@ -1224,26 +1224,26 @@\n  (second == \n-59\n+60\n ) %7B%0A        \n@@ -1306,18 +1306,18 @@\n nute == \n-59\n+60\n ) %7B%0A    \n"
+        },
+        {
+            "label": "2024-11-28_09-37-40",
+            "content": "@@ -443,17 +443,17 @@\n %7C h %3E= 2\n-3\n+4\n )%7B%0A     \n"
+        },
+        {
+            "label": "2024-11-28_09-38-15",
+            "content": "@@ -1224,26 +1224,26 @@\n  (second == \n-60\n+59\n ) %7B%0A        \n@@ -1310,10 +1310,10 @@\n  == \n-60\n+59\n ) %7B%0A\n@@ -1397,9 +1397,9 @@\n == 2\n-4\n+3\n ) %7B%0A\n"
+        },
+        {
+            "label": "2024-11-28_09-40-12",
+            "content": "@@ -440,16 +440,17 @@\n 0 %7C%7C h %3E\n+=\n  23)%7B%0A  \n"
+        },
+        {
+            "label": "2024-11-28_09-45-50",
+            "content": "@@ -1499,34 +1499,17 @@\n ring() %7B\n- // ajuda do chat\n %0A\n+\n     stri\n@@ -1792,24 +1792,16 @@\n :%0A    //\n- criar o\n  Constru\n@@ -1901,16 +1901,26 @@\n %0A%0A    //\n+ M%C3%A9todo de\n  inicial\n@@ -2108,24 +2108,48 @@\n cond);%0A    %7D\n+%0A%0A    // M%C3%A9todos setters\n %0A    void se\n@@ -2444,20 +2444,51 @@\n %0A    %7D%0A%0A\n-\n     \n+// M%C3%A9todo para exibir o hor%C3%A1rio\n %0A    voi\n"
+        },
+        {
+            "label": "2024-11-29_12-53-48",
+            "content": "@@ -498,24 +498,8 @@\n l; %0A\n-        return;%0A\n     \n@@ -1224,20 +1224,21 @@\n (second \n-%3E 59\n+== 60\n ) %7B%0A    \n@@ -1302,20 +1302,21 @@\n (minute \n-%3E 59\n+== 60\n ) %7B%0A    \n@@ -1388,20 +1388,21 @@\n f (hour \n-%3E 23\n+== 24\n ) %7B%0A    \n"
+        },
+        {
+            "label": "2024-11-29_12-55-56",
+            "content": "@@ -498,24 +498,31 @@\n l; %0A        \n+return;\n %0A    %7D%0A    r\n"
+        },
+        {
+            "label": "2024-11-29_12-56-07",
+            "content": "@@ -506,15 +506,8 @@\n     \n-return;\n %0A   \n@@ -509,24 +509,30 @@\n  %0A    %7D%0A    \n+return\n  this-%3Ehour \n"
+        },
+        {
+            "label": "2024-11-29_13-02-34",
+            "content": "@@ -498,24 +498,31 @@\n l; %0A        \n+return;\n %0A    %7D%0A     \n@@ -517,31 +517,24 @@\n %0A    %7D%0A     \n-return \n this-%3Ehour =\n"
+        },
+        {
+            "label": "2024-11-29_13-02-49",
+            "content": "@@ -2175,36 +2175,8 @@\n     \n- (void) hour;%0A        this-%3E\n  tim\n"
+        },
+        {
+            "label": "2024-11-29_13-04-29",
+            "content": "@@ -255,20 +255,16 @@\n os gets%0A\n-    \n int getH\n@@ -288,23 +288,16 @@\n   return\n- this-%3E\n  hour; %0A\n@@ -330,31 +330,24 @@\n %7B%0A    return\n- this-%3E\n  minute; %0A  \n@@ -378,31 +378,24 @@\n %7B%0A    return\n- this-%3E\n  second; %0A  \n"
+        },
+        {
+            "label": "2024-11-29_13-05-34",
+            "content": "@@ -71,18 +71,16 @@\n int hour\n-=0\n ;%0A    in\n@@ -87,18 +87,16 @@\n t minute\n-=0\n ;%0A    in\n@@ -107,10 +107,8 @@\n cond\n-=0\n ;%0Apu\n@@ -135,22 +135,28 @@\n nt h\n+=0\n , int m\n+=0\n , int s\n+=0\n ) : \n@@ -292,16 +292,23 @@\n   return\n+ this-%3E\n  hour; %0A\n@@ -345,16 +345,23 @@\n   return\n+ this-%3E\n  minute;\n@@ -400,16 +400,23 @@\n   return\n+ this-%3E\n  second;\n"
+        },
+        {
+            "label": "2024-11-29_13-06-36",
+            "content": "@@ -157,77 +157,40 @@\n  s) \n-%7B%0A%0A      setHour(h); %0A      setMinute(m); %0A      setSecond(s);%0A      \n+: hour(h), minute(m), second(s)%7B\n %7D%0A  \n"
+        },
+        {
+            "label": "2024-11-29_13-12-04",
+            "content": "@@ -551,24 +551,37 @@\n %0A    %7D%0A     \n+return this-%3E\n hour = h;%0A%7D%0A\n"
+        },
+        {
+            "label": "2024-11-29_13-12-35",
+            "content": "@@ -555,29 +555,16 @@\n  %7D%0A     \n-return this-%3E\n hour = h\n"
+        },
+        {
+            "label": "2024-11-29_13-15-11",
+            "content": "@@ -677,24 +677,26 @@\n  endl; %0A    \n+%7D%0A\n     return;%0A\n@@ -693,27 +693,16 @@\n   return\n-;%0A    %7D%0A   \n  this-%3E \n"
+        },
+        {
+            "label": "2024-11-29_14-28-52",
+            "content": "@@ -677,16 +677,31 @@\n  endl; %0A\n+        return;\n %0A    %7D%0A \n"
+        },
+        {
+            "label": "2024-11-29_14-29-15",
+            "content": "@@ -440,20 +440,19 @@\n %0A    %7D%0A%0A\n-void\n+int\n  setHour\n@@ -551,24 +551,31 @@\n %0A    %7D%0A     \n+return \n this-%3Ehour =\n@@ -576,28 +576,27 @@\n hour = h;%0A%7D%0A\n-void\n+int\n  setMinute(i\n@@ -669,32 +669,33 @@\n lido%22 %3C%3C endl; %0A\n+%0A\n     %7D%0A    this-%3E\n@@ -709,20 +709,19 @@\n  = m;%0A%7D%0A\n-void\n+int\n  setSeco\n@@ -813,24 +813,30 @@\n  %0A    %7D%0A    \n+return\n  this-%3E seco\n"
+        },
+        {
+            "label": "2024-11-29_14-30-25",
+            "content": "@@ -540,32 +540,25 @@\n l; %0A        \n-return;\n %0A\n+\n     %7D%0A     t\n@@ -672,32 +672,16 @@\n  endl; %0A\n-        return;%0A\n     %7D%0A  \n@@ -743,32 +743,32 @@\n %3C 0 %7C%7C s %3E 59)%7B%0A\n+\n         cout %3C%3C \n@@ -806,24 +806,8 @@\n l; %0A\n-        return;%0A\n     \n@@ -2038,24 +2038,82 @@\n ) %7B%0A        \n+(void) hour;%0A        (void) minute;%0A        (void) second;\n %0A        thi\n"
+        },
+        {
+            "label": "2024-11-29_14-36-27",
+            "content": "#include \"fn.hpp\"\n\nusing namespace std;\n\nclass Relogio\n{\nprivate:\n    int hour=0;\n    int minute=0;\n    int second=0;\npublic:\n     Relogio(int h, int m, int s) {\n\n      setHour(h); \n      setMinute(m); \n      setSecond(s);\n      }\n    \n// como os parametris sao privados, devo criar os metodos gets\n    int getHour()  {\n     \n    return hour; \n    }\n    int getMinute() {\n    return minute; \n    }\n    int getSecond() {\n    return second; \n    }\n\nvoid setHour(int h){\n    if ( h < 0 || h > 23){\n        cout << \"fail: hora invalida\" << endl; \n        return;\n    }\n     this->hour = h;\n}\nvoid setMinute(int m){\n    if(m < 0 || m > 59){\n        cout << \"fail: minuto invalido\" << endl; \n        return;\n    }\n    this-> minute = m;\n}\nvoid setSecond(int s){\n    if(s < 0 || s > 59){\n        cout << \"fail: segundo invalido\" << endl; \n        return;\n    }\n     this-> second = s;\n}\n// Parte 5: nextSecond\n    // - Crie um m\u00e9todo nextSecond que incrementa o segundo em 1.\n    // - Crie um objeto rel\u00f3gio, atribua valores para hora, minuto e segundo e imprima a hora.\n    // - Teste o m\u00e9todo nextSecond criando horas com os seguintes valores e testando:\n    // - 10:02:30\n    // - 15:50:59\n    // - 21:59:59\n    // - 23:59:59\n     void nextSecond() {    // ajuda do chat\n        second++;\n        if (second > 59) {\n            second = 0;\n            minute++;\n            if (minute > 59) {\n                minute = 0;\n                hour++;\n                if (hour > 23) {\n                    hour = 0; \n                }\n            }\n        }\n    }\n    string toString() { // ajuda do chat\n    string h = (hour < 10 ? \"0\" : \"\") + std::to_string(hour);\n    string m = (minute < 10 ? \"0\" : \"\") + std::to_string(minute);\n    string s = (second < 10 ? \"0\" : \"\") + std::to_string(second);\n    return h + \":\" + m + \":\" + s;\n}\n};\n\nclass Adapter {\nprivate:\n    Relogio time;\n\npublic:\n    // criar o Construtor\n    Adapter(int hour = 0, int minute = 0, int second = 0) : time(hour, minute, second) {}\n\n    // inicializa\u00e7\u00e3o\n    void init(int hour = 0, int minute = 0, int second = 0) {\n        \n        this->time = Relogio(hour, minute, second);\n    }\n    void setHour(int hour) {\n        (void) hour;\n        this-> time.setHour(hour);\n    }\n\n    void setMinute(int minute) {\n        time.setMinute(minute);\n    }\n\n    void setSecond(int second) {\n        time.setSecond(second);\n    }\n\n    // M\u00e9todo para incrementar o segundo\n    void nextSecond() {\n        time.nextSecond();\n    }\n\n    \n    void show() {\n        fn::write(time.toString());\n    }\n};\n\nint main() {\n    Adapter stu;\n\n    while (true) {\n        fn::write(\"$\", \"\");\n\n        auto line = fn::input();\n        auto args = fn::split(line, ' ');\n\n        fn::write(line);\n\n        if (args[0] == \"end\") {\n            break;\n        }\n        else if (args[0] == \"set\") {\n            stu.setHour(+args[1]);\n            stu.setMinute(+args[2]);\n            stu.setSecond(+args[3]);\n        } \n        else if (args[0] == \"init\") {\n            stu.init(+args[1], +args[2], +args[3]);\n        }\n        else if (args[0] == \"show\") {\n            stu.show();\n        }\n        else if (args[0] == \"next\") {\n            stu.nextSecond();\n        }\n        else {\n            fn::write(\"fail: comando invalido\");\n        }\n    }\n    return 0;\n}"
+        }
+    ]
+}
