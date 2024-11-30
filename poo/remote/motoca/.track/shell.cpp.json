@@ -1,0 +1,8 @@
+{
+    "patches": [
+        {
+            "label": "2024-11-29_22-23-56",
+            "content": "#include \"fn.hpp\"\n#include \"student.hpp\"\n\nint main() {\n    Adapter adp;\n\n    while (true) {\n        auto line = fn::input();\n        auto args = fn::split(line, ' ');\n        fn::write('$' + line);\n\n        if      (args[0] == \"end\"  ) { break;                              }\n\n        else if (args[0] == \"init\" ) { adp.init(+args[1]);                 }\n        else if (args[0] == \"show\" ) { adp.show();                         }\n        else if (args[0] == \"leave\") { adp.leave();                        }\n        else if (args[0] == \"honk\" ) { adp.honk();                         }\n        else if (args[0] == \"enter\") { adp.enter( args[1], +args[2]);      }\n        else if (args[0] == \"buy\"  ) { adp.buy(  +args[1]);                }\n        else if (args[0] == \"drive\") { adp.drive(+args[1]);                }\n\n        else                         { fn::write(\"fail: invalid command\"); }\n    }\n}\n"
+        }
+    ]
+}
