@@ -85,7 +85,7 @@ public:
                 return "Falha, não há passageiro\n";
             }
             if (passageiro->getDinheiro() < custo) {
-                std::cout << "fail: Passenger does not have enough money\n";
+                cout << "fail: Passenger does not have enough money\n";
             }
             motorista->addDinheiro(custo);
             passageiro->descontar(custo);
