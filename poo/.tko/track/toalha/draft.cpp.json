@@ -1,0 +1,36 @@
+{
+    "patches": [
+        {
+            "label": "2024-12-20_07-56-59",
+            "content": "@@ -328,24 +328,25 @@\n oalha(string\n+&\n  cor = %22%22,st\n@@ -349,16 +349,18 @@\n %22,string\n+& \n T = %22%22) \n"
+        },
+        {
+            "label": "2024-12-20_07-57-31",
+            "content": "@@ -348,17 +348,16 @@\n %22,string\n- \n T = %22%22) \n"
+        },
+        {
+            "label": "2024-12-20_07-57-48",
+            "content": "@@ -375,17 +375,17 @@\n , T(T), \n-u\n+U\n mi(0)%7B%7D%0A\n"
+        },
+        {
+            "label": "2024-12-20_07-58-07",
+            "content": "@@ -647,17 +647,17 @@\n f(umi + \n-u\n+U\n miRecebi\n"
+        },
+        {
+            "label": "2024-12-20_07-58-20",
+            "content": "@@ -616,17 +616,17 @@\n gar(int \n-u\n+U\n miRecebi\n"
+        },
+        {
+            "label": "2024-12-20_07-58-34",
+            "content": "@@ -664,17 +664,17 @@\n da %3E get\n-u\n+U\n miMaxima\n"
+        },
+        {
+            "label": "2024-12-20_07-58-48",
+            "content": "@@ -695,25 +695,25 @@\n    umi = get\n-u\n+U\n miMaxima();%0A\n"
+        },
+        {
+            "label": "2024-12-20_07-59-10",
+            "content": "#include <iostream>\n#include <sstream>\n#include <iomanip>\n#include <array>\n#include <set>\n#include <map>\n#include <vector>\n#include <list>\n#include <unordered_map>\n#include <unordered_set>\n#include <memory>\n\nusing namespace std;\n\nclass Toalha{\n\n    private:\n    string cor;\n    string T;\n    int umi{0}; \n\n    public:\n        Toalha(string cor = \"\",string T = \"\") : cor(cor), T(T), umi(0){}\n\n    int getUmiM() {\n        if(T == \"P\"){\n            return  10;\n        }\n       if(T == \"M\"){\n            return 20;\n        }\n        if(T == \"G\"){\n            return 30;\n        }\n        return 0;\n    }\n\n    void enxugar(int umiRecebida){\n        if(umi + umiRecebida > getumiMaxima()){\n            umi = getumiMaxima();\n            cout << \"toalha enxarcada\\n\";\n        }else{\n            umi += umiRecebida;\n        }\n    }\n\n    void torcer(){\n        umi = 0;\n    }\n\n    bool estaSeca() {\n       if (umi == 0) {\n            cout << \"True\\n\"; \n            return true;\n        } else {\n            cout << \"False\\n\";\n            return false;\n        }\n    }\n\n    string toString(){\n        return cor + \" \" + T + \" \" + to_string(umi);\n    }\n\n    void mostrar(){\n        cout << toString() << \"\\n\";\n    }\n};\nint main() {\n    Toalha toalha(\"Azul\", \"P\");\n    toalha.mostrar();\n    toalha.enxugar(5);\n    toalha.mostrar() ;\n    toalha.estaSeca();\n    toalha.enxugar(5);\n    toalha.mostrar();\n    toalha.enxugar(5);\n    toalha.mostrar();\n    toalha.torcer(); \n    toalha = Toalha(\"Verde\", \"G\");\n    toalha.estaSeca();\n    toalha.enxugar(30);\n    toalha.mostrar();\n    toalha.estaSeca();\n    toalha.enxugar(1);\n    toalha.enxugar(30);\n}\n"
+        }
+    ]
+}

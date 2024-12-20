@@ -3,6 +3,9 @@
 #include <memory>
 #include <algorithm>
 
+using namespace std;
+
+
 class Bateria {
 private:
     int capacidade{0};
@@ -24,7 +27,7 @@ public:
         return carga;
     }
 
-    void usarCarga(int minutos) {
+    void use(int minutos) {
         if (carga >= minutos) {
             carga -= minutos;
         } else {
@@ -32,7 +35,7 @@ public:
         }
     }
 
-    bool estaVazia() {
+    bool vazia() {
         return carga <= 0;
     }
 
@@ -46,7 +49,7 @@ public:
         return ss.str();
     }
 
-    void mostrar() {
+    void ver() {
         cout << str() << endl;
     }
 };
@@ -62,7 +65,7 @@ public:
         return potencia;
     }
 
-    void carregarBateria(Bateria* bateria, int minutos) {
+    void carregarBateria(shared_ptr<Bateria> bateria, int minutos) {
         if (bateria) {
             bateria->carregarBateria(minutos);
         }
@@ -74,7 +77,7 @@ public:
         return ss.str();
     }
 
-    void mostrar() {
+    void ver() {
         cout << "(Potência " << str() << ")" << endl;
     }
 };
@@ -82,24 +85,24 @@ public:
 class Notebook {
 private:
     bool ligado = false;
-    Bateria* bateria;
-    Carregador* carregador;
+    shared_ptr<Bateria> bateria;
+    shared_ptr<Carregador> carregador;
 
 public:
     Notebook() : ligado{false}, bateria(nullptr), carregador(nullptr) {}
 
-    void setBateria(Bateria* bat) {
+    void setBateria(shared_ptr<Bateria> bat) {
         bateria = bat;
     }
 
-    void setCarregador(Carregador* ch) {
+    void setCarregador(shared_ptr<Carregador> ch) {
         carregador = ch;
     }
 
     void ligar() {
         if (ligado) {
             cout << "Notebook já está ligado.\n";
-        } else if (!bateria || bateria->estaVazia()) {
+        } else if (!bateria || bateria->vazia()) {
             cout << "Não foi possível ligar\n";
         } else {
             ligado = true;
@@ -112,7 +115,7 @@ public:
             cout << "Notebook desligado.\n";
             ligado = false;
         } else {
-            cout << "Notebook já está desligado.\n";
+            cout << "Notebook está desligado.\n";
         }
     }
 
@@ -122,38 +125,38 @@ public:
             return;
         }
 
-        if (!bateria || bateria->estaVazia()) {
-            cout << "Notebook descarregou e foi desligado.\n";
+        if (!bateria || bateria->vazia()) {
+            cout << "Notebook descarregou\n";
             desligar();
             return;
         }
 
-        int usoReal = min(tempo, bateria->getCarga());
-        bateria->usarCarga(usoReal);
-        cout << "Usando por " << usoReal << " minutos.\n";
+        int uso = min(tempo, bateria->getCarga());
+        bateria->use(uso);
+        cout << "Usando por " << uso << " minutos.\n";
 
-        if (bateria->estaVazia()) {
-            cout << "Notebook descarregou e foi desligado.\n";
+        if (bateria->vazia()) {
+            cout << "Notebook descarregou\n";
             desligar();
         }
     }
 
-    Bateria* rmBateria() {
+    shared_ptr<Bateria> rmBateria() {
         if (!bateria) {
             cout << "Nenhuma bateria para remover.\n";
             return nullptr;
         }
 
-        auto removedBattery = bateria;
+        auto bateryRemove = bateria;
         bateria = nullptr;
         if (ligado) {
             desligar();
         }
         cout << "Bateria removida.\n";
-        return removedBattery;
+        return bateryRemove;
     }
 
-    void mostrar() {
+    void ver() {
         cout << "Status: " << (ligado ? "Ligado" : "Desligado");
         if (bateria) {
             cout << ", Bateria: " << bateria->str();
@@ -170,37 +173,37 @@ public:
 
 int main() {
     Notebook notebook;
-    notebook.mostrar();
+    notebook.ver();
     notebook.ligar();
     notebook.usar(10);
 
     auto bateria = make_shared<Bateria>(50); 
-    bateria->mostrar();
+    bateria->ver();
     
     notebook.setBateria(bateria);
-    notebook.mostrar();
+    notebook.ver();
     notebook.ligar();
-    notebook.mostrar();
+    notebook.ver();
     notebook.usar(30);
-    notebook.mostrar();
+    notebook.ver();
     notebook.usar(30);
-    notebook.mostrar();
+    notebook.ver();
     
-    auto removedBattery = notebook.rmBateria();
-    removedBattery->mostrar();
-    notebook.mostrar();
+    auto bateryRemove = notebook.rmBateria();
+    bateryRemove->ver();
+    notebook.ver();
 
     auto carregador = make_shared<Carregador>(2);
-    carregador->mostrar();
+    carregador->ver();
 
     notebook.setCarregador(carregador);
-    notebook.mostrar();
+    notebook.ver();
     notebook.ligar();
-    notebook.mostrar();
+    notebook.ver();
     notebook.setBateria(bateria);
-    notebook.mostrar();
+    notebook.ver();
     notebook.usar(10);
-    notebook.mostrar();
+    notebook.ver();
 
     return 0;
 }

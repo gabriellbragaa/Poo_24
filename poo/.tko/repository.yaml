@@ -1,0 +1,33 @@
+remote: https://github.com/qxcodepoo/arcade/blob/master/Readme.md
+version: 0.0.1
+expanded:
+- campanha-principal
+- primeiras-classes
+- modificadores-de-acesso
+- agregação-simples
+- arraylist-i---listas
+tasks:
+  toalha: '100:5:5:0'
+  animal: '100:5:5:0'
+  carro: '100:5:5:0'
+  calculadora: '100:4:5:0'
+  chinela: '100:4:5:0'
+  camisa: '100:5:5:0'
+  roupa: '100:5:5:0'
+  relogio: '100:3:4:0'
+  notebook: '100:5:5:0'
+  motoca: '90:3:5:0'
+  grafite: '90:3:3:0'
+  motouber: '100:4:4:0'
+  tamagotchi: '80:4:5:0'
+  lapiseira: '7:0:0:0'
+flags:
+  minimum: 0
+  reward: 0
+  percent: 0
+  admin: 0
+  skills: 0
+  devel: 0
+new_items: []
+lang: cpp
+index: tabuleiro

@@ -52,29 +52,37 @@ struct Calculator{
        display =  (a) + (b);
        Battery--;
        return display;
+    } 
+    bool BatteryConsumo()
+    {
+        if(this->Battery <= 0)
+        {
+            cout << "fail: bateria insuficiente" << endl;
+            return false;
+        }
+
+        this->Battery -= 1;
+        return true;
     }
     // Crie o método para dividir.
     // Verifique se existe bateria, se existir gaste, se não, emita o erro.
     // Verifique se a divisão é possível, se não for, emita o erro e retorne.
     // Guarde o resultado no display.
-    int division (int num, int den){
-        Battery--;
-        if (Battery == 0  ){
-           cout << "fail: bateria insuficiente" << endl;
-            return 0;
-        } else if (Battery < 0){
-            Battery = 0;;
+    void division(int num, int den)
+    {
+        if(BatteryConsumo()){
+            if (den == 0)
+            {
+                cout << "fail: divisao por zero" <<endl;
+            }
+            else
+            {
+                display = (float) num / den;
+            }
+            
         }
-        if (den == 0){
-         cout << "fail: divisao por zero" << endl;
-         return 0;
-        }
-        
-        display = (num) / den ;
-        return display;
-
     }
-    
+
 
 
     string toString()
