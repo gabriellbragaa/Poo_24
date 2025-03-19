@@ -89,7 +89,7 @@ public:
             }
             motorista->addDinheiro(custo);
             passageiro->descontar(custo);
-            string mensagem = fn::format("{}:{} leave\n", passageiro->getName(), passageiro->getDinheiro());
+            string mensagem = fn::format("{}:{} left\n", passageiro->getName(), passageiro->getDinheiro());
             custo = 0;
             passageiro = nullptr;
             return mensagem;

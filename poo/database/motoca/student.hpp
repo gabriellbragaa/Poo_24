@@ -163,7 +163,10 @@ public:
         (void) time;
         motoca.drive(time);
     }
-
+    void end()
+    {
+        
+    }
     void show() {
         fn::write(motoca.toString());
     }
